@@ -65,4 +65,14 @@ public class Cliente extends PanacheEntityBase {
 	public void setEmprestimos(List<Emprestimo> emprestimos) {
 		this.emprestimos = emprestimos;
 	}
+
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "email='" + email + '\'' +
+                ", nome='" + nome + '\'' +
+                ", contato='" + contato + '\'' +
+                '}';
+    }
 }
