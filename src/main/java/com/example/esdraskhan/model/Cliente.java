@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
@@ -20,6 +21,7 @@ public class Cliente extends PanacheEntityBase {
 
     @Id
     @Schema(example = "email@email.com")
+    @Email(message = "Email formato Incorreto")
     @NotBlank(message="O campo e-mail é obrigatório!")
     private String email;
 
@@ -66,6 +68,12 @@ public class Cliente extends PanacheEntityBase {
 		this.emprestimos = emprestimos;
 	}
 
+
+    //POSSO CRIAR AS CONSULTAS COMO METODOS DA PROPRIA ENTIDADE
+    public  static Cliente findbyEmail(String email)
+    {
+        return find("email",email).firstResult();
+    }
 
     @Override
     public String toString() {
