@@ -6,6 +6,7 @@ import io.quarkus.panache.common.Sort;
 import javax.enterprise.context.RequestScoped;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @RequestScoped
 public class ClienteDao {
@@ -19,6 +20,8 @@ public class ClienteDao {
     public void cadastrar(Cliente cliente) {
         cliente.persist();
     }
+
+
 
 
     public Cliente buscarPorEmail(String email){
@@ -36,5 +39,16 @@ public class ClienteDao {
     }
 
 
+    @Transactional
+    public Optional<Cliente> atualizar(Cliente cliente) {
+       Cliente encontrar=Cliente.findbyEmail(cliente.getEmail());
 
+       if(encontrar==null)
+       {
+           return Optional.empty();
+       }
+       encontrar.setNome(cliente.getNome());
+       encontrar.setContato(cliente.getContato());
+       return Optional.of(encontrar);
+    }
 }

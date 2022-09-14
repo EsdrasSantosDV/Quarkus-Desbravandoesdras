@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import javax.ws.rs.NotFoundException;
+import java.security.InvalidParameterException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,7 +33,7 @@ public class ClienteService {
 
 
     }
-
+    @Transactional
     public void excluir(String email) {
         //VALIDAR SE O ID E VALIDO
         if(dao.buscarPorEmail(email)==null)
@@ -51,5 +52,11 @@ public class ClienteService {
         ClienteDto clientedto=ClienteParser.get().dto(cliente);
         return clientedto;
     }
-
+    @Transactional
+    public ClienteDto atualizar(String email, ClienteDto todo) {
+        todo.setEmail(email);
+        Cliente cliente=ClienteParser.get().entidade(todo);
+        ClienteDto dto;
+        return dto= ClienteParser.get().dto(dao.atualizar(cliente).orElseThrow(() -> new InvalidParameterException("Cliente nao Encontrado")));
+    }
 }

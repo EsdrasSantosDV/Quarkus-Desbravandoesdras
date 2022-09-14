@@ -14,7 +14,9 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.security.InvalidParameterException;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.validation.ConstraintViolation;
@@ -80,7 +82,31 @@ public class ClienteRest {
         return Response.status(Response.Status.CREATED).build();
     }
 
-
+    //ATUALIZANDO RETORNANDO O CLIENTE ATUALIZADO
+    @PUT
+    @Path("/{email}")
+    @Operation(
+            summary = "Atualizar um cliente pelo Email",
+            description = "Atualizar um Cliente pelo Email"
+    )
+    @APIResponse(
+            responseCode = "200",
+            description = "atualizar cliente",
+            content ={
+                    @Content(mediaType="application/json",
+                            schema = @Schema(implementation = ClienteDto.class))
+            })
+    public Response atualizar(@PathParam("email") String email,ClienteDto todo)
+    {
+        try {
+            return Response.ok(service.atualizar(email,todo)).build();
+        } catch (Exception e) {
+            if (e instanceof InvalidParameterException) {
+                return Response.status(Response.Status.NOT_FOUND).entity(Map.of("message", e.getMessage())).build();
+            }
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+    }
 
     @DELETE
     @Path("/{email}")
