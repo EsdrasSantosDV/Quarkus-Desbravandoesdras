@@ -5,7 +5,7 @@ import com.example.esdraskhan.dao.AutorDao;
 
 
 import com.example.esdraskhan.model.Autor;
-import com.example.esdraskhan.model.AutorDto;
+import com.example.esdraskhan.dto.AutorDto;
 import com.example.esdraskhan.parser.AutorParser;
 
 

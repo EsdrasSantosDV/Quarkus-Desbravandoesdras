@@ -1,4 +1,4 @@
-package com.example.esdraskhan.model;
+package com.example.esdraskhan.dto;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 

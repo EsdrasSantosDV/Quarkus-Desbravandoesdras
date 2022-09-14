@@ -1,7 +1,7 @@
 package com.example.esdraskhan.parser;
 
 import com.example.esdraskhan.model.Autor;
-import com.example.esdraskhan.model.AutorDto;
+import com.example.esdraskhan.dto.AutorDto;
 
 public class AutorParser {
 

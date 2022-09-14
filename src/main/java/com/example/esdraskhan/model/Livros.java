@@ -56,6 +56,11 @@ public class Livros extends PanacheEntityBase{
 		this.quatidadeExemplares = quatidadeExemplares;
 	}
 
+
+	public static Livros findbyISBN(String isbn) {
+		return find("isbn",isbn).firstResult();
+	}
+
 	public String getNome() {
 
 		return nome;
