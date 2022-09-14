@@ -34,8 +34,12 @@ public class ClienteService {
     }
 
     public void excluir(String email) {
-
-
+        //VALIDAR SE O ID E VALIDO
+        if(dao.buscarPorEmail(email)==null)
+        {
+            throw new NotFoundException();
+        }
+        dao.excluirPorEmail(email);
     }
      public ClienteDto buscarPorEmail(String email)
     {

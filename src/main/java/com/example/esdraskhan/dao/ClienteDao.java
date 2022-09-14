@@ -25,6 +25,16 @@ public class ClienteDao {
         Cliente cliente= Cliente.findbyEmail(email);
         return cliente;
     }
+    @Transactional
+    public void excluirPorEmail(String email)
+    {
+        Cliente cliente= Cliente.findbyEmail(email);
+        if(cliente.isPersistent()){
+            // delete it
+            cliente.delete();
+        }
+    }
+
 
 
 }
