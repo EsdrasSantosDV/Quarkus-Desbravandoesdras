@@ -1,6 +1,6 @@
 package com.example.esdraskhan.model;
 
-import java.text.SimpleDateFormat;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,12 +22,12 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 @Entity
 @Table(name="tb_autor")
-public class Autor extends PanacheEntityBase {
+public class Autor extends PanacheEntityBase{
 	
 	
 	@Id
-	@NotBlank(message="O campo ISNI é obrigatório!")
-	private String ISNI;
+	@NotBlank(message="O campo isni é obrigatório!")
+	private String isni;
 	
 	@NotBlank(message="O campo nome é obrigatório!")
 	@Size(max = 50, message = "o nome deve conter no maximo 50 caracteres")
@@ -56,17 +56,17 @@ public class Autor extends PanacheEntityBase {
 	public Autor() {
 	}
 
-	public Autor( String nome, String ISNI, String email, LocalDate dataNascimento, String biografia){
+	public Autor( String nome, String isni, String email, LocalDate dataNascimento, String biografia){
 	
 		this.nome = nome;
-		this.ISNI = ISNI;
+		this.isni = isni;
 		this.email = email;
 		this.dataNascimento = dataNascimento;
 		this.biografia = biografia;
 	}
 
 	public static Autor findbyISNI(String isni) {
-		return find("ISNI",isni).firstResult();
+		return find("isni",isni).firstResult();
 	}
 
 	public String getNome() {
@@ -77,12 +77,12 @@ public class Autor extends PanacheEntityBase {
 		this.nome = nome;
 	}
 
-	public String getISNI() {
-		return ISNI;
+	public String getIsni() {
+		return isni;
 	}
 
-	public void setISNI(String iSNI) {
-		ISNI = iSNI;
+	public void setIsni(String iSNI) {
+		isni = iSNI;
 	}
 
 	public String getEmail() {
@@ -120,7 +120,7 @@ public class Autor extends PanacheEntityBase {
 	@Override
 	public String toString() {
 		return "Autor{" +
-				"ISNI='" + ISNI + '\'' +
+				"isni='" + isni + '\'' +
 				", nome='" + nome + '\'' +
 				", email='" + email + '\'' +
 				", dataNascimento=" + dataNascimento +

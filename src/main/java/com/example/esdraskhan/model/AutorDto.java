@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class AutorDto {
 
 
-    private String ISNI;
+    private String isni;
 
     private String nome;
 
@@ -21,12 +21,12 @@ public class AutorDto {
 
     private String biografia;
 
-    public String getISNI() {
-        return ISNI;
+    public String getIsni() {
+        return isni;
     }
 
-    public void setISNI(String ISNI) {
-        this.ISNI = ISNI;
+    public void setIsni(String isni) {
+        this.isni = isni;
     }
 
     public String getNome() {
@@ -64,7 +64,7 @@ public class AutorDto {
     @Override
     public String toString() {
         return "AutorDto{" +
-                "ISNI='" + ISNI + '\'' +
+                "isni='" + isni + '\'' +
                 ", nome='" + nome + '\'' +
                 ", email='" + email + '\'' +
                 ", dataNascimento=" + dataNascimento +

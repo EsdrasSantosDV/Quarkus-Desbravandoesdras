@@ -12,7 +12,7 @@ public class AutorParser {
     public Autor entidade(AutorDto dto)
     {
         Autor entidade=new Autor();
-        entidade.setISNI(dto.getISNI());
+        entidade.setIsni(dto.getIsni());
         entidade.setBiografia(dto.getBiografia());
         entidade.setDataNascimento(dto.getDataNascimento());
         entidade.setNome(dto.getNome());
@@ -24,7 +24,7 @@ public class AutorParser {
         AutorDto dto = new AutorDto();
         dto.setDataNascimento(entidade.getDataNascimento());
         dto.setBiografia(entidade.getBiografia());
-        dto.setISNI(entidade.getISNI());
+        dto.setIsni(entidade.getIsni());
         dto.setNome(entidade.getNome());
         dto.setEmail(entidade.getEmail());
         return dto;

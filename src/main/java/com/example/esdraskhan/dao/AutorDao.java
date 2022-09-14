@@ -43,7 +43,7 @@ public class AutorDao {
 
     @Transactional
     public Optional<Autor> atualizar(Autor autor) {
-        Autor encontrar=Autor.findbyISNI(autor.getISNI());
+        Autor encontrar=Autor.findbyISNI(autor.getIsni());
         if(encontrar==null)
         {
             return Optional.empty();

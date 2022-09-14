@@ -8,7 +8,7 @@ insert into cliente(email,nome,contato) values('maratona6@stefanini.com','Develo
 insert into cliente(email,nome,contato) values('maratona7@stefanini.com','Developer Up7','(11) 88888-8888');
 insert into cliente(email,nome,contato) values('maratona8@stefanini.com','Developer Up8','(11) 88888-8888');
 
-INSERT INTO tb_autor(ISNI,nome,email,data_nascimento,biografia) VALUES
+INSERT INTO tb_autor(isni,nome,email,data_nascimento,biografia) VALUES
 ('INNI','Esdras','gmesdras201afs6@gmail.com','2021-09-03','AUTOR NASCIDO  dasf NO NORDESTE'),
 ('INNI2','Esdras','gmesdras207fas5@gmail.com','2021-09-03','AUTOR NASCIDO df daNO NORDESTE'),
 ('INNI3','Esdras','gmesdras205afs5@gmail.com','2021-09-03','AUTOR NASCIDO NO dsaf NORDESTE'),

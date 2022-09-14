@@ -17,7 +17,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 public class Livros extends PanacheEntityBase{
 
 	@Id
-	private String ISBN;
+	private String isbn;
 
 	@NotBlank(message="O campo nome é obrigatório!")
 	@Size(max = 50, message = "o nome deve conter no maximo 50 caracteres")
@@ -52,7 +52,7 @@ public class Livros extends PanacheEntityBase{
 		this.nome = nome;
 		this.anoDePublicacao = anoDePublicacao;
 		this.editora = editora;
-		this.ISBN = ISBN;
+		this.isbn = ISBN;
 		this.quatidadeExemplares = quatidadeExemplares;
 	}
 
@@ -92,11 +92,11 @@ public class Livros extends PanacheEntityBase{
 	}
 
 	public String getISBN() {
-		return ISBN;
+		return isbn;
 	}
 
 	public void setISBN(String iSBN) {
-		ISBN = iSBN;
+		isbn= iSBN;
 	}
 
 	public Autor getAutor() {

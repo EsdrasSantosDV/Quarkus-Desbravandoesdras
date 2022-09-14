@@ -58,7 +58,7 @@ public class AutorService {
     }
     @Transactional
     public AutorDto atualizar(String ISNI, AutorDto todo) {
-        todo.setISNI(ISNI);
+        todo.setIsni(ISNI);
         Autor autor=AutorParser.get().entidade(todo);
         AutorDto dto;
         return dto= AutorParser.get().dto(dao.atualizar(autor).orElseThrow(() -> new InvalidParameterException("Autor nao Encontrado")));

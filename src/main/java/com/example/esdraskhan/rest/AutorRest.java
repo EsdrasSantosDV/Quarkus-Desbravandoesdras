@@ -45,7 +45,7 @@ public class AutorRest {
     }
 
     @GET
-    @Path("/{ISNI}")
+    @Path("/{isni}")
     @Operation(
             summary = "Buscar um Autor pelo ISNI",
             description = "Buscar um Autor pelo ISNI"
@@ -57,7 +57,7 @@ public class AutorRest {
                     @Content(mediaType="application/json",
                             schema = @Schema(implementation = AutorDto.class))
             })
-    public Response buscarPorISNI(@PathParam("ISNI") String ISNI)
+    public Response buscarPorISNI(@PathParam("isni") String ISNI)
     {
         return Response.status(Response.Status.OK)
                 .entity(service.buscarPorISNI(ISNI))
@@ -89,7 +89,7 @@ public class AutorRest {
 
     //ATUALIZANDO RETORNANDO O AUTOR ATUALIZADO
     @PUT
-    @Path("/{ISNI}")
+    @Path("/{isni}")
     @Operation(
             summary = "Atualizar um Autor pelo ISNI",
             description = "Atualizar um Autor pelo ISNI"
@@ -101,7 +101,7 @@ public class AutorRest {
                     @Content(mediaType="application/json",
                             schema = @Schema(implementation = AutorDto.class))
             })
-    public Response atualizar(@PathParam("ISNI") String ISNI,AutorDto todo)
+    public Response atualizar(@PathParam("isni") String ISNI,AutorDto todo)
     {
         try {
             return Response.ok(service.atualizar(ISNI,todo)).build();
@@ -114,7 +114,7 @@ public class AutorRest {
     }
 
     @DELETE
-    @Path("/{ISNI}")
+    @Path("/{isni}")
     @Operation(
             summary = "Excluir um Autor pelo ISNI",
             description = "Excluir um Autor pelo ISNI"
@@ -126,7 +126,7 @@ public class AutorRest {
                     @Content(mediaType="application/json",
                             schema = @Schema(implementation = AutorDto.class))
             })
-    public Response excluir(@PathParam("ISNI") String ISNI){
+    public Response excluir(@PathParam("isni") String ISNI){
         service.excluir(ISNI);
         return Response.status(Response.Status.ACCEPTED)
                 .build();
