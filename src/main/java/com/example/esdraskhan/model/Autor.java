@@ -1,6 +1,7 @@
 package com.example.esdraskhan.model;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -34,13 +36,13 @@ public class Autor extends PanacheEntityBase {
 		
 	@Schema(example = "email@email.com")
 	@NotBlank(message="O campo e-mail é obrigatório!")
+	@Email(message="O email esta invalido")
 	@Column(name = "email")
 	private String email;
-	
-	@NotBlank(message="O campo data de nasciemento é obrigatório!")
-	@Column(name = "data_nascimento")
-	private String dataNascimento;
-	
+
+	@Column(name = "data_nascimento",nullable = false,updatable = false)
+	private LocalDate dataNascimento;
+
 	@NotBlank(message="O campo biografia é obrigatório!")
 	@Size(max = 200, message = "A biografia deve possuir no maximo 200 caracteres")
 	@Column(name = "biografia")
@@ -49,19 +51,22 @@ public class Autor extends PanacheEntityBase {
 	@OneToMany(mappedBy = "autor", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("autor")
 	private List<Livros> livros;
-	
-	SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+
 	
 	public Autor() {
 	}
 
-	public Autor( String nome, String ISNI, String email, String dataNascimento, String biografia){
+	public Autor( String nome, String ISNI, String email, LocalDate dataNascimento, String biografia){
 	
 		this.nome = nome;
 		this.ISNI = ISNI;
 		this.email = email;
 		this.dataNascimento = dataNascimento;
 		this.biografia = biografia;
+	}
+
+	public static Autor findbyISNI(String isni) {
+		return find("ISNI",isni).firstResult();
 	}
 
 	public String getNome() {
@@ -88,11 +93,11 @@ public class Autor extends PanacheEntityBase {
 		this.email = email;
 	}
 
-	public String getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(String dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
@@ -111,8 +116,16 @@ public class Autor extends PanacheEntityBase {
 	public void setLivros(List<Livros> livros) {
 		this.livros = livros;
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "Autor{" +
+				"ISNI='" + ISNI + '\'' +
+				", nome='" + nome + '\'' +
+				", email='" + email + '\'' +
+				", dataNascimento=" + dataNascimento +
+				", biografia='" + biografia + '\'' +
+				'}';
+	}
 }
 
