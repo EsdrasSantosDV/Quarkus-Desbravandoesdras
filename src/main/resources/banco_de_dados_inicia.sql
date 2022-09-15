@@ -16,3 +16,9 @@ INSERT INTO tb_autor(isni,nome,email,data_nascimento,biografia) VALUES
 ('INNI5','Esdras','gmesdraadfdas20124@gmail.com','2022-09-03','AUTOR NASCIDO N dadfsO NORDESTE'),
 ('INNI6','Esdras','gmesadfdras2015452@gmail.com','2023-09-03','AUTORfdaads NASCIDO N adsO NORDESTE'),
 ('INNI7','Esdras','gmesdasdras20155@gmail.com','2024-09-03','AUTOR NAdf aSCIDO NO NORDESTE');
+
+
+insert into livros (isbn, ano_publicacao, editora, nome, quantidade_exemplares,autor_isni)
+values ('12848128158421','2009','AbrilEa','UnionEsdaast',422,'INNI'),
+('12848128158242','2002','Abrildsasda','UnionEsdst',422,'INNI3'),
+('1284812815824242','2002','Abrildsasda','UnionEsdst',422,'INNI4');

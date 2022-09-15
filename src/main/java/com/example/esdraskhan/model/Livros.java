@@ -12,11 +12,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name="livros")
-public class Livros extends PanacheEntityBase{
+public class Livros extends PanacheEntityBase  implements  Serializable{
 
 	@Id
+	@NotBlank(message="O campo isbn é obrigatório!")
 	private String isbn;
 
 	@NotBlank(message="O campo nome é obrigatório!")
@@ -32,7 +35,7 @@ public class Livros extends PanacheEntityBase{
 	@Size(max = 50, message = "A editora deve conter no maximo 50 caracteres")
 	private String editora;
 
-	@NotBlank(message="O campo quantidade de exemplares é obrigatório!")
+
 	@Column(name = "quantidade_exemplares")
 	private Integer quatidadeExemplares;
 
@@ -44,15 +47,15 @@ public class Livros extends PanacheEntityBase{
 	private Emprestimo emprestimo;
 
 	public Livros() {
-		super();
+
 	}
 
-	public Livros( String nome, String anoDePublicacao, String editora, String ISBN, Integer quatidadeExemplares) {
+	public Livros( String nome, String anoDePublicacao, String editora, String isbn, Integer quatidadeExemplares) {
 
 		this.nome = nome;
 		this.anoDePublicacao = anoDePublicacao;
 		this.editora = editora;
-		this.isbn = ISBN;
+		this.isbn = isbn;
 		this.quatidadeExemplares = quatidadeExemplares;
 	}
 
@@ -96,12 +99,13 @@ public class Livros extends PanacheEntityBase{
 		this.quatidadeExemplares = quatidadeExemplares;
 	}
 
-	public String getISBN() {
+
+	public String getIsbn() {
 		return isbn;
 	}
 
-	public void setISBN(String iSBN) {
-		isbn= iSBN;
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
 	}
 
 	public Autor getAutor() {
@@ -120,7 +124,16 @@ public class Livros extends PanacheEntityBase{
 		this.emprestimo = emprestimo;
 	}
 
-
-
-
+	@Override
+	public String toString() {
+		return "Livros{" +
+				"isbn='" + isbn + '\'' +
+				", nome='" + nome + '\'' +
+				", anoDePublicacao='" + anoDePublicacao + '\'' +
+				", editora='" + editora + '\'' +
+				", quatidadeExemplares=" + quatidadeExemplares +
+				", autor=" + autor +
+				", emprestimo=" + emprestimo +
+				'}';
+	}
 }

@@ -64,7 +64,7 @@ public class ClienteRest {
 
 
     @POST
-    @Operation(summary = "Cadastrar", description = "Cadastar um Cliente")
+    @Operation(summary = "Cadastrar", description = "Cadastrar um Cliente")
     @APIResponse(responseCode = "201", description = "ClienteDto",
             content = {@Content(mediaType = "application/json",
                     schema = @Schema(implementation = ClienteDto.class))})

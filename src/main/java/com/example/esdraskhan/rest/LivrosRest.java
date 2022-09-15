@@ -2,8 +2,11 @@
 package com.example.esdraskhan.rest;
 
 
+
 import com.example.esdraskhan.dto.AutorDto;
-import com.example.esdraskhan.services.AutorService;
+import com.example.esdraskhan.dto.LivrosDto;
+import com.example.esdraskhan.model.Livros;
+import com.example.esdraskhan.services.LivrosService;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
@@ -24,85 +27,82 @@ import java.util.stream.Collectors;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@Path("/autores")
+@Path("/livros")
 @RequestScoped
-public class AutorRest {
+public class LivrosRest {
 
     @Inject
-    AutorService service;
-
+    LivrosService service;
     @Inject
     Validator validator;
+
     @GET
-    @Operation(summary = "Listar", description = "Retorna uma lista de Autores")
-    @APIResponse(responseCode = "200", description = "AutorDto",
+    @Operation(summary = "Listar", description = "Retorna uma lista de Livros")
+    @APIResponse(responseCode = "200", description = "LivrosDto",
             content = {@Content(mediaType = "application/json",
-                    schema = @Schema(implementation = AutorDto.class))})
+                    schema = @Schema(implementation = LivrosDto.class))})
     public Response listar()  {
         return Response.status(Response.Status.OK).entity(service.listar()).build();
     }
 
-    @GET
-    @Path("/{isni}")
-    @Operation(
-            summary = "Buscar um Autor pelo ISNI",
-            description = "Buscar um Autor pelo ISNI"
-    )
-    @APIResponse(
-            responseCode = "200",
-            description = "autor",
-            content ={
-                    @Content(mediaType="application/json",
-                            schema = @Schema(implementation = AutorDto.class))
-            })
-    public Response buscarPorISNI(@PathParam("isni") String ISNI)
-    {
-        return Response.status(Response.Status.OK)
-                .entity(service.buscarPorISNI(ISNI))
-                .build();
-    }
-
-
-
     @POST
-    @Operation(summary = "Cadastrar", description = "Cadastrar um Autor")
-    @APIResponse(responseCode = "201", description = "AutorDto",
+    @Operation(summary = "Cadastrar", description = "Cadastrar um Livro")
+    @APIResponse(responseCode = "201", description = "LivrosDto",
             content = {@Content(mediaType = "application/json",
-                    schema = @Schema(implementation = AutorDto.class))})
-    public Response cadastrar(AutorDto autor) throws Exception {
+                    schema = @Schema(implementation = LivrosDto.class))})
+    public Response cadastrar(LivrosDto livro) throws Exception {
 
-        System.out.println("Rest"+autor.toString());
-        Set<ConstraintViolation<AutorDto>> erros=validator.validate(autor);
+        Set<ConstraintViolation<LivrosDto>> erros=validator.validate(livro);
         if(erros.isEmpty())
         {
-            service.cadastrar(autor);
+            service.cadastrar(livro);
         }
         else
         {
             List<String> listaErros=erros.stream().map(ConstraintViolation::getMessage).collect(Collectors.toList());
             throw new NotFoundException(listaErros.get(0));
         }
+
+
         return Response.status(Response.Status.CREATED).build();
     }
-
-    //ATUALIZANDO RETORNANDO O AUTOR ATUALIZADO
-    @PUT
-    @Path("/{isni}")
+    @GET
+    @Path("/{isbn}")
     @Operation(
-            summary = "Atualizar um Autor pelo ISNI",
-            description = "Atualizar um Autor pelo ISNI"
+            summary = "Buscar um Livro pelo ISBN",
+            description = "Buscar um Autor pelo ISBN"
     )
     @APIResponse(
             responseCode = "200",
-            description = "atualizar autor",
+            description = "livro",
             content ={
                     @Content(mediaType="application/json",
-                            schema = @Schema(implementation = AutorDto.class))
+                            schema = @Schema(implementation = LivrosDto.class))
             })
-    public Response atualizar(@PathParam("isni") String ISNI,AutorDto todo)
+    public Response buscarPorISBN(@PathParam("isbn") String ISBN)
+    {
+        return Response.status(Response.Status.OK)
+                .entity(service.buscarPorISBN(ISBN))
+                .build();
+    }
+
+    @PUT
+    @Path("/{isbn}")
+    @Operation(
+            summary = "Atualizar um Livro pelo ISBN",
+            description = "Atualizar um Livro pelo ISBN"
+    )
+    @APIResponse(
+            responseCode = "200",
+            description = "atualizar livro",
+            content ={
+                    @Content(mediaType="application/json",
+                            schema = @Schema(implementation = LivrosDto.class))
+            })
+    public Response atualizar(@PathParam("isbn") String ISBN,LivrosDto todo)
     {
         try {
-            return Response.ok(service.atualizar(ISNI,todo)).build();
+            return Response.ok(service.atualizar(ISBN,todo)).build();
         } catch (Exception e) {
             if (e instanceof InvalidParameterException) {
                 return Response.status(Response.Status.NOT_FOUND).entity(Map.of("message", e.getMessage())).build();
@@ -112,24 +112,23 @@ public class AutorRest {
     }
 
     @DELETE
-    @Path("/{isni}")
+    @Path("/{isbn}")
     @Operation(
-            summary = "Excluir um Autor pelo ISNI",
-            description = "Excluir um Autor pelo ISNI"
+            summary = "Excluir um Livro pelo ISBN",
+            description = "Excluir um Livro pelo ISBN"
     )
     @APIResponse(
             responseCode = "202",
-            description = "excluir Autor",
+            description = "excluir Livro",
             content ={
                     @Content(mediaType="application/json",
-                            schema = @Schema(implementation = AutorDto.class))
+                            schema = @Schema(implementation = LivrosDto.class))
             })
-    public Response excluir(@PathParam("isni") String ISNI){
-        service.excluir(ISNI);
+    public Response excluir(@PathParam("isbn") String ISBN){
+        service.excluir(ISBN);
         return Response.status(Response.Status.ACCEPTED)
                 .build();
     }
-
 
 
 
