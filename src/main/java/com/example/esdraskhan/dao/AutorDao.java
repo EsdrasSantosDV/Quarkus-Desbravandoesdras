@@ -2,6 +2,7 @@ package com.example.esdraskhan.dao;
 
 import com.example.esdraskhan.model.Autor;
 import io.quarkus.panache.common.Sort;
+import org.eclipse.microprofile.opentracing.Traced;
 
 import javax.enterprise.context.RequestScoped;
 import javax.transaction.Transactional;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RequestScoped
+@Traced
 public class AutorDao {
 
 

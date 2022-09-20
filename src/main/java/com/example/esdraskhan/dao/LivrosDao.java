@@ -4,12 +4,14 @@ import com.example.esdraskhan.model.Autor;
 import com.example.esdraskhan.model.Livros;
 import com.example.esdraskhan.model.Livros;
 import io.quarkus.panache.common.Sort;
+import org.eclipse.microprofile.opentracing.Traced;
 
 import javax.enterprise.context.RequestScoped;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 @RequestScoped
+@Traced
 public class LivrosDao {
 
     public List<Livros> listar(){

@@ -7,6 +7,7 @@ import com.example.esdraskhan.dao.AutorDao;
 import com.example.esdraskhan.model.Autor;
 import com.example.esdraskhan.dto.AutorDto;
 import com.example.esdraskhan.parser.AutorParser;
+import org.eclipse.microprofile.opentracing.Traced;
 
 
 import javax.enterprise.context.RequestScoped;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 //NADA DE PERSISTENCIA
 //VALIDAÇÃO SE ENCONTRA AQUI
 @RequestScoped
+@Traced
 public class AutorService {
     @Inject
     AutorDao dao;

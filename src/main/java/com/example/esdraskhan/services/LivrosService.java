@@ -9,6 +9,7 @@ import com.example.esdraskhan.model.Autor;
 import com.example.esdraskhan.model.Livros;
 import com.example.esdraskhan.parser.AutorParser;
 import com.example.esdraskhan.parser.LivrosParser;
+import org.eclipse.microprofile.opentracing.Traced;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 //NADA DE PERSISTENCIA
 //VALIDAÇÃO SE ENCONTRA AQUI
 @RequestScoped
+@Traced
 public class LivrosService {
     @Inject
     LivrosDao dao;
